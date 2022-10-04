@@ -9,7 +9,7 @@ let getHomePage = async (req, res) => { // đây là tạo fuction tham số là
         console.log(data);
         console.log("---------------------");
         return res.render('homepages.ejs', {
-            data: JSON.stringify(data)
+            data: JSON.stringify(data) // đổi data thành chuỗi
         });
     } catch (e) {
         console.log(e);
