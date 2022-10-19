@@ -21,8 +21,19 @@ let getme = (req, res) => {
     return res.render('test/aboutme.ejs');
 }
 
+let getCRUD = (req, res) => {
+    return res.render('../views/crud.ejs');
+}
+
+let postCRUD = (req, res) => {
+    console.log(req.body);
+    return res.send('alo');
+}
+
 
 module.exports = {
     getHomePage: getHomePage,
     getme: getme,
+    getCRUD: getCRUD,
+    postCRUD: postCRUD
 }

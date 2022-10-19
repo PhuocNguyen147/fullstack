@@ -7,6 +7,8 @@ let router = express.Router();
 let initWebRoutes = (app) => {  // truyền ứng dụng "app" vào
     router.get('/', homeController.getHomePage); // "/" là đường link trên localhost
     router.get('/about', homeController.getme);
+    router.get('/crud', homeController.getCRUD);
+    router.get('/post-crud', homeController.postCRUD)
 
     router.get('/phuoc', (req, res) => { // "/" là đường link trên localhost
         return res.send('đây là đường link dẫn đến nhà Phước')
