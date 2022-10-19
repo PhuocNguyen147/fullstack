@@ -1,5 +1,5 @@
 import db from '../models/index';
-
+import CRUDService from '../services/CRUDService';
 let getHomePage = async (req, res) => { // đây là tạo fuction tham số là req và res
 
     // return res.send("Hello controller");
@@ -25,9 +25,9 @@ let getCRUD = (req, res) => {
     return res.render('../views/crud.ejs');
 }
 
-let postCRUD = (req, res) => {
-    console.log(req.body);
-    return res.send('alo');
+let postCRUD = async (req, res) => {
+    await CRUDService.createNewUers(req.body);
+    return res.send('post crud');
 }
 
 
