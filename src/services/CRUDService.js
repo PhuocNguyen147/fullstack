@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import db from '../models/index';
 const salt = bcrypt.genSaltSync(10);
-// creat database tu ban phim
+// creat database tu ban phim`
 let createNewUers = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -21,8 +21,6 @@ let createNewUers = async (data) => {
             reject(e);
         }
     })
-
-
 }
 
 let hashUserPassword = (password) => { // sử dụng mảng băm bcrypt để mã hóa password
@@ -94,9 +92,26 @@ let updateUserData = (data) => {
     })
 }
 
+let deleteUserById = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await db.User.findOne({
+                where: { id: userId }
+            })
+            if (user)
+                await user.destroy();
+
+            resolve();
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
     createNewUers: createNewUers,// create len database
     getAllUser: getAllUser,
     getUserInfoById: getUserInfoById,
     updateUserData: updateUserData,
+    deleteUserById: deleteUserById
 }

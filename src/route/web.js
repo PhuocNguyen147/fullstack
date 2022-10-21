@@ -12,6 +12,7 @@ let initWebRoutes = (app) => {  // truyền ứng dụng "app" vào
     router.get('/get-crud', homeController.displayGetCRUD);
     router.get('/edit-crud', homeController.getEditCRUD);
     router.post('/put-crud', homeController.putCRUD);
+    router.get('/delete-crud', homeController.deleteCRUD);
 
     router.get('/phuoc', (req, res) => { // "/" là đường link trên localhost
         return res.send('đây là đường link dẫn đến nhà Phước')

@@ -27,15 +27,16 @@ let getCRUD = (req, res) => {
 //create du liệu trên database
 let postCRUD = async (req, res) => {
     let message = await CRUDService.createNewUers(req.body);
+    // console.log();
     console.log(message);
     return res.send('post crud');
 }
 //hiển thị dư liệu lên màn hình view
 let displayGetCRUD = async (req, res) => {
     let data = await CRUDService.getAllUser();
-    console.log("---------------------");
-    console.log(data)
-    console.log("---------------------");
+    // console.log("---------------------");
+    // console.log(data)
+    // console.log("---------------------");
     return res.render('displayCRUD.ejs', {
         dataTable: data
     });
@@ -43,6 +44,7 @@ let displayGetCRUD = async (req, res) => {
 
 let getEditCRUD = async (req, res) => {
     let userId = req.query.id;
+
 
     if (userId) {
         let userData = await CRUDService.getUserInfoById(userId);
@@ -60,9 +62,21 @@ let getEditCRUD = async (req, res) => {
 
 let putCRUD = async (req, res) => {
     let data = req.body;
+    console.log(data);
     await CRUDService.updateUserData(data);
     return res.send('data update')
 }
+
+let deleteCRUD = async (req, res) => {
+    let id = req.query.id;
+    if (id) {
+        await CRUDService.deleteUserById(id);
+        return res.send('Delete success')
+    } else {
+        return res.send('User not found')
+    }
+}
+
 
 module.exports = {
     getHomePage: getHomePage,
@@ -72,4 +86,5 @@ module.exports = {
     displayGetCRUD: displayGetCRUD,
     getEditCRUD: getEditCRUD,
     putCRUD: putCRUD,
+    deleteCRUD: deleteCRUD,
 }
