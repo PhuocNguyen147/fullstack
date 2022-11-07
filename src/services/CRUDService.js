@@ -12,11 +12,13 @@ let createNewUers = async (data) => {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 address: data.address,
+                phonenumber: data.phonenumber,
                 gender: data.gender === '1' ? true : false,
                 roleId: data.roleId,
-                phonenumber: data.phonenumber,
+
             })
             resolve("Khoi tao User thanh cong");
+
         } catch (e) {
             reject(e);
         }
@@ -26,7 +28,7 @@ let createNewUers = async (data) => {
 let hashUserPassword = (password) => { // sử dụng mảng băm bcrypt để mã hóa password
     return new Promise(async (resolve, reject) => { //resolve giải quyết được vấn đề, reject từ chối
         try {
-            let hashPassword = await bcrypt.hashSync("password", salt);
+            let hashPassword = await bcrypt.hashSync(password, salt);
             resolve(hashPassword);// khi sử dụng promise. resolve tương tự như return 
         } catch (e) {
             reject(e);

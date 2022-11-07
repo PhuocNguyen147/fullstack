@@ -4,11 +4,12 @@ import bodyParser from "body-parser"; // lấy được tham sô mà phía clien
 import viewEngine from "./config/viewEngine";
 import initWebRoutes from "./route/web";
 import connectDB from "./config/connectDB";
+import cors from 'cors';
 require('dotenv').config(); // gọi đến hàm config của dotenv để chạy lệnh process.env 
 // let dotenv
 let app = express();
 //config app
-
+app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 

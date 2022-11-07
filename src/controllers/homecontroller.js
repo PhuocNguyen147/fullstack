@@ -7,6 +7,7 @@ let getHomePage = async (req, res) => { // đây là tạo fuction tham số là
         let data = await db.User.findAll();
         console.log("---------------------");
         console.log(data);
+
         console.log("---------------------");
         return res.render('homepages.ejs', {
             data: JSON.stringify(data) // đổi data thành chuỗi
@@ -44,8 +45,6 @@ let displayGetCRUD = async (req, res) => {
 
 let getEditCRUD = async (req, res) => {
     let userId = req.query.id;
-
-
     if (userId) {
         let userData = await CRUDService.getUserInfoById(userId);
         // kiem tra userdata not found
