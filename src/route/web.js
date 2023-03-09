@@ -16,7 +16,13 @@ let initWebRoutes = (app) => {  // truyền ứng dụng "app" vào
     router.get('/delete-crud', homeController.deleteCRUD);
 
     router.post('/api/login', userController.handleLogin);
+    router.get('/api/getAllUsers', userController.handleGetAllUsers);
 
+    router.post('/api/createNewUser', userController.handleCreateNewUser);
+    router.put('/api/editUser', userController.handleEditUser);
+    router.delete('/api/deleteUser', userController.handleDeleteUser);
+
+    router.get('/api/allcode', userController.getAllCode);
     router.get('/phuoc', (req, res) => { // "/" là đường link trên localhost
         return res.send('đây là đường link dẫn đến nhà Phước')
     });

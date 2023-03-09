@@ -59,6 +59,7 @@ let getEditCRUD = async (req, res) => {
 
 }
 
+
 let putCRUD = async (req, res) => {
     let data = req.body;
     console.log(data);
