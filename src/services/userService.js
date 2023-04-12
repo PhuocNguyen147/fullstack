@@ -115,7 +115,6 @@ let createNewUser = (data) => {
                     lastName: data.lastName,
                     address: data.address,
                     phonenumber: data.phonenumber,
-
                     gender: data.gender,
                     roleId: data.roleId,
                     positionId: data.positionId
@@ -161,6 +160,12 @@ let deleteUser = (userId) => {
 let updateUserData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            if (!data.id || !data.roleId || !data.positionId || !data.gender) {
+                resolve({
+                    errcode: 2,
+                    errMessage: 'lỗi không có tham số'
+                })
+            }
             let user = await db.User.findOne({
                 where: { id: data.id },
                 raw: false
@@ -169,6 +174,10 @@ let updateUserData = (data) => {
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
                 user.address = data.address;
+                user.roleId = data.roleId;
+                user.positionId = data.positionId;
+                user.gender = data.gender;
+                user.phonenumber = data.phonenumber;
 
                 await user.save();
                 resolve({
