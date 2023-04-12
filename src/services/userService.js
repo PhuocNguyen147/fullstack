@@ -177,7 +177,7 @@ let updateUserData = (data) => {
                 user.roleId = data.roleId;
                 user.positionId = data.positionId;
                 user.gender = data.gender;
-                user.phonenumber = data.phonenumber;
+                user.phonenumber = data.phonenumber
 
                 await user.save();
                 resolve({
