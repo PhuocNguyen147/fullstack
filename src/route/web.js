@@ -25,6 +25,8 @@ let initWebRoutes = (app) => {  // truyền ứng dụng "app" vào
     router.get('/api/allcode', userController.getAllCode);
 
     router.get('/api/top-doctor-home', doctorController.getTopDoctorHome);
+    router.get('/api/getalldoctor', doctorController.getAllDoctor);
+
     router.get('/phuoc', (req, res) => { // "/" là đường link trên localhost
         return res.send('đây là đường link dẫn đến nhà Phước')
     });

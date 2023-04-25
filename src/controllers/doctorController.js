@@ -16,6 +16,20 @@ let getTopDoctorHome = async (req, res) => {
     }
 }
 
+let getAllDoctor = async (req, res) => {
+    try {
+        let doctors = await doctorService.getAllDoctors()
+        return res.status(200).json(doctors)
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Loi sever from getAllDoctor'
+        })
+    }
+}
+
 module.exports = {
-    getTopDoctorHome: getTopDoctorHome
+    getTopDoctorHome: getTopDoctorHome,
+    getAllDoctor: getAllDoctor
 }
