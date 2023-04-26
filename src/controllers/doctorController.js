@@ -29,7 +29,22 @@ let getAllDoctor = async (req, res) => {
     }
 }
 
+let postInforDoctor = async (req, res) => {
+    try {
+        let response = await doctorService.saveDetailInforDoctor(req.body);
+        return res.status(200).json(response);
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Loi sever from getAllDoctor'
+        })
+    }
+}
+
+
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
-    getAllDoctor: getAllDoctor
+    getAllDoctor: getAllDoctor,
+    postInforDoctor: postInforDoctor
 }

@@ -3,7 +3,7 @@ const {
     Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class markdown extends Model {
+    class Markdown extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
         }
     };
-    markdown.init({ // khai báo các model 
+    Markdown.init({ // khai báo các model 
         // id: DataTypes.INTEGER,
         contentHTML: DataTypes.TEXT('long'),
         contentMarkdown: DataTypes.TEXT('long'),
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
     }, {
         sequelize,
-        modelName: 'markdown',
+        modelName: 'Markdown',
     });
-    return markdown;
+    return Markdown;
 };

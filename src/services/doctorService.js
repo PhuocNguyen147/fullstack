@@ -54,10 +54,40 @@ let getAllDoctors = () => {
 }
 
 
+// chi tiet doctor
+let saveDetailInforDoctor = (inputData) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!inputData.doctorId ||
+                !inputData.contentHTML ||
+                !inputData.contentMarkdown) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'loi save bac si'
+                })
+            }
+            else {
+                await db.Markdown.create({
+                    contentHTML: inputData.contentHTML,
+                    contentMarkdown: inputData.contentMarkdown,
+                    description: inputData.description,
+                    doctorId: inputData.doctorId
+                })
 
+                resolve({
+                    errCode: 0,
+                    errMessage: 'Save chi tiet bac si thanh cong'
+                })
+            }
 
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
 
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
-    getAllDoctors: getAllDoctors
+    getAllDoctors: getAllDoctors,
+    saveDetailInforDoctor: saveDetailInforDoctor,
 }
