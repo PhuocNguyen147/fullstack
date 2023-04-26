@@ -17,16 +17,15 @@ let initWebRoutes = (app) => {  // truyền ứng dụng "app" vào
 
     router.post('/api/login', userController.handleLogin);
     router.get('/api/getAllUsers', userController.handleGetAllUsers);
-
     router.post('/api/createNewUser', userController.handleCreateNewUser);
     router.put('/api/editUser', userController.handleEditUser);
     router.delete('/api/deleteUser', userController.handleDeleteUser);
-
     router.get('/api/allcode', userController.getAllCode);
 
     router.get('/api/top-doctor-home', doctorController.getTopDoctorHome);
     router.get('/api/getalldoctor', doctorController.getAllDoctor);
     router.post('/api/saveinfordoctor', doctorController.postInforDoctor);
+    router.get('/api/get-detail-doctor-by-id', doctorController.getDetailDoctorById);
 
     router.get('/phuoc', (req, res) => { // "/" là đường link trên localhost
         return res.send('đây là đường link dẫn đến nhà Phước')
