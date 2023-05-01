@@ -151,6 +151,8 @@ let getDetailDoctorById = (inputId) => {
 let bulkCreateSchedule = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log('data.formatedDate', data.formatedDate);
+            console.log('data.formatedDate', data.doctorId);
             if (!data.arrSchedule || !data.doctorId || !data.formatedDate) {
                 resolve({
                     errCode: 1,
@@ -160,7 +162,7 @@ let bulkCreateSchedule = (data) => {
                 let schedule = data.arrSchedule;
                 if (schedule && schedule.length > 0) {
                     schedule = schedule.map(item => {
-                        item.maxNumber = MAX_NUMBER_SCHEDULE;
+                        // item.maxNumber = MAX_NUMBER_SCHEDULE;
                         return item;
                     })
                 }
@@ -175,15 +177,10 @@ let bulkCreateSchedule = (data) => {
                 );
 
 
-                if (existing && existing.length > 0) {
-                    existing = existing.map(item => {
-                        item.date = new Date(item.date).getTime();
-                        return item;
-                    })
-                }
+
 
                 let toCreate = _.differenceWith(schedule, existing, (a, b) => {
-                    return a.timeType === b.timeType && a.date === b.date;
+                    return a.timeType === b.timeType && +a.date === +b.date;
                 })
 
                 if (toCreate && toCreate.length > 0) {
@@ -218,6 +215,12 @@ let getScheduleByDate = (doctorId, date) => {
                         doctorId: doctorId,
                         date: date
                     },
+                    include: [
+
+                        { model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi'] }, // lấy map mối quan hệ bảng schedule với bảng allcode
+                    ],
+                    raw: false,
+                    nest: true // định dạng dữ liêu
 
                 })
                 if (!dataSchedule) dataSchedule = [];
