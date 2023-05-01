@@ -26,6 +26,8 @@ let initWebRoutes = (app) => {  // truyền ứng dụng "app" vào
     router.get('/api/getalldoctor', doctorController.getAllDoctor);
     router.post('/api/saveinfordoctor', doctorController.postInforDoctor);
     router.get('/api/get-detail-doctor-by-id', doctorController.getDetailDoctorById);
+    router.post('/api/bulk-create-schedule', doctorController.bulkCreateSchedule);
+
 
     router.get('/phuoc', (req, res) => { // "/" là đường link trên localhost
         return res.send('đây là đường link dẫn đến nhà Phước')
