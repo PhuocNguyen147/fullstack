@@ -265,7 +265,8 @@ let getScheduleByDate = (doctorId, date) => {
                     },
                     include: [
 
-                        { model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi'] }, // lấy map mối quan hệ bảng schedule với bảng allcode
+                        { model: db.Allcode, as: 'timeTypeData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.User, as: 'doctorData', attributes: ['firstName', 'lastName'] },// lấy map mối quan hệ bảng schedule với bảng allcode
                     ],
                     raw: false,
                     nest: true // định dạng dữ liêu
