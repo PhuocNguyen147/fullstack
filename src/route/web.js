@@ -33,7 +33,7 @@ let initWebRoutes = (app) => {  // truyền ứng dụng "app" vào
     router.get('/api/get-profile-doctor-by-id', doctorController.getProfileDoctorById);
 
     router.post('/api/patient-book-appointment', patientController.postBookAppointment);
-
+    router.post('/api/verify-book-appointment', patientController.postVerifyBookAppointment);
 
     router.get('/phuoc', (req, res) => { // "/" là đường link trên localhost
         return res.send('đây là đường link dẫn đến nhà Phước')
