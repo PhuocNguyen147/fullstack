@@ -1,7 +1,7 @@
 import { reject, resolve } from "bluebird"
 import db from "../models/index"
 
-
+import emailService from './emailService'
 
 let postBookAppointment = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -13,6 +13,16 @@ let postBookAppointment = (data) => {
                 })
             }
             else {
+                // Thông tin của bác sĩ và giờ khám đế gửi cho bệnh nhân 
+                await emailService.sendSimpleEmail({
+                    receiverEmail: data.email,
+                    patientName: 'Phuoc Nguyen',
+                    time: '10:00-11:00 - thứ năm - 5/5/2023',
+                    doctorName: 'Đỗ Đức Quân',
+                    redirectLink: 'https://www.youtube.com/watch?v=ADkVOsJwAAU'
+
+                }) // gửi nội dung đặt lịch cho email của bệnh nhân
+
                 // update tạo thêm email cho bệnh nhân đăng ký khám bệnh
                 let user = await db.User.findOrCreate({
                     where: { email: data.email },
