@@ -131,7 +131,20 @@ let getListPatient = async (req, res) => {
         })
     }
 }
-
+let sendRemedy = async (req, res) => {
+    try {
+        let infor = await doctorService.sendRemedy(req.body);
+        return res.status(200).json(
+            infor
+        )
+    } catch (e) {
+        console.log(e)
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Loi sever from getExtraInforDoctorById'
+        })
+    }
+}
 
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
@@ -142,5 +155,6 @@ module.exports = {
     getScheduleByDate: getScheduleByDate,
     getExtraInforDoctorById: getExtraInforDoctorById,
     getProfileDoctorById: getProfileDoctorById,
-    getListPatient: getListPatient
+    getListPatient: getListPatient,
+    sendRemedy: sendRemedy
 }

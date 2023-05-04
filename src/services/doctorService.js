@@ -1,6 +1,7 @@
 import { reject, resolve } from "bluebird"
 import db from "../models/index"
 import _ from 'lodash'
+import emailService from './emailService'
 require('dotenv').config();
 
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
@@ -424,6 +425,52 @@ let getListPatient = (doctorId, date) => {
     })
 }
 
+let sendRemedy = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.email || !data.doctorId || !data.patientId || !data.timeType) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'loi sendRemedy/ Missing required parameter '
+                })
+            } else {
+                //update patient status
+                let appointment = await db.Booking.findOne({
+                    where: {
+                        doctorId: data.doctorId,
+                        patientId: data.patientId,
+                        timeType: data.timeType,
+                        statusId: 'S2'
+                    },
+                    raw: false
+                })
+
+                if (appointment) {
+                    appointment.statusId = 'S3' // cập nhận bệnh nhân đã khám
+                    await appointment.save()
+                }
+
+
+                //send remedy email
+                await emailService.sendAttachment(data);
+                resolve({
+                    errCode: 0,
+                    errMessage: 'send remedy success'
+                })
+
+
+            }
+
+
+
+
+        }
+        catch (e) {
+            reject(e)
+        }
+
+    })
+}
 
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
@@ -434,5 +481,6 @@ module.exports = {
     getScheduleByDate: getScheduleByDate,
     getExtraInforDoctorById: getExtraInforDoctorById,
     getProfileDoctorById: getProfileDoctorById,
-    getListPatient: getListPatient
+    getListPatient: getListPatient,
+    sendRemedy: sendRemedy
 }
